@@ -36,3 +36,5 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 eval "$(rbenv init -)"
+
+export PATH=/usr/local/bin:$PATH
