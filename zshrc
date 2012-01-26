@@ -29,12 +29,17 @@ ZSH_THEME="blinks"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew git pip github zsh-syntax-highlighting gem ruby rbenv)
+plugins=(brew git python pip github zsh-syntax-highlighting gem ruby rbenv)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+export PATH=/usr/texbin:/usr/local/share/python:/usr/local/share/python3:/usr/local/bin:$PATH
 
 eval "$(rbenv init -)"
 
-export PATH=/usr/local/bin:$PATH
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/src
+export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
+
+source /usr/local/share/python/virtualenvwrapper.sh
