@@ -1,6 +1,6 @@
 " Author: Nick Haliday
-" Description: First attempt at a decent vim setup. Based off of some vimrc on
-"              StackOverflow as well as the vim wiki's example.
+" Description: First attempt at a decent vim setup. Based off of some
+"              vimrc on StackOverflow as well as the vim wiki's example.
 
 " Packages {{{
 

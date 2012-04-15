@@ -34,12 +34,13 @@ plugins=(brew git python pip github zsh-syntax-highlighting gem ruby rbenv)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/texbin:/usr/local/share/python:/usr/local/share/python3:/usr/local/bin:$PATH
+export PATH=$HOME/.cabal/bin:/usr/texbin:/usr/local/share/python:/usr/local/share/python3:/usr/local/sbin:/usr/local/bin
+export EDITOR=mvim
 
 eval "$(rbenv init -)"
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/src
-export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
+# export PYTHONPATH=/usr/local/lib/python:/usr/local/lib/python2.7:$PYTHONPATH
 
 source /usr/local/share/python/virtualenvwrapper.sh
