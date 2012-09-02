@@ -5,14 +5,26 @@
 " Packages {{{
 
 " Set up pathogen.
-call pathogen#infect()
-call pathogen#helptags()
+" call pathogen#infect()
+" call pathogen#helptags()
+
+" required for some reason
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'tpope/vim-fugitive'
+Bundle 'altercation/vim-colors-solarized'
+
 
 " }}}
 
 " The Essentials {{{
 
-" Are we living in the dark ages? Let's use vim not vi.
+" Let's use vim not vi.
 set nocompatible
 
 " Allow vim to determine the type of a file using its name and contents.
@@ -101,11 +113,15 @@ set history=1000
 set spl=en spell
 set nospell
 
+" Set line width and the default window width
+" set textwidth=76
+" set columns=80
+
 " }}}
 
 " Indentation Options {{{
 
-" Indentation settings for soft tabs using 4 spaces.
+" Indentation settings for soft tabs
 set shiftwidth=4
 set softtabstop=4
 set expandtab
