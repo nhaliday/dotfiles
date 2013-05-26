@@ -1,7 +1,3 @@
-" Author: Nick Haliday
-" Description: First attempt at a decent vim setup. Based off of some
-"              vimrc on StackOverflow as well as the vim wiki's example.
-
 " Packages {{{
 
 " Set up pathogen.
@@ -24,14 +20,14 @@ Bundle 'altercation/vim-colors-solarized'
 
 " The Essentials {{{
 
-" Let's use vim not vi.
+" vim not vi
 set nocompatible
 
 " Allow vim to determine the type of a file using its name and contents.
 " Use this information for auto-indentation and any plugin that's filetype-specific.
 filetype indent plugin on
 
-" Syntax highlighting? Yes, please.
+" Enable syntax highlighting
 syntax enable
 
 " }}}
@@ -100,10 +96,10 @@ set cmdheight=2
 " Display line numbers.
 set number
 
-" Highlight the current line
+" Highlight the current line.
 " set cursorline
 
-" Quickly time out on keycodes, but never time out on mappings
+" Quickly time out on keycodes, but never time out on mappings.
 set notimeout ttimeout ttimeoutlen=200
 
 " Up the number of commands maintained in vim's history.
@@ -113,7 +109,7 @@ set history=1000
 set spl=en spell
 set nospell
 
-" Set line width and the default window width
+" Set line width and the default window width.
 " set textwidth=76
 " set columns=80
 
@@ -121,7 +117,7 @@ set nospell
 
 " Indentation Options {{{
 
-" Indentation settings for soft tabs
+" Indentation settings for soft tabs.
 set shiftwidth=4
 set softtabstop=4
 set expandtab
@@ -135,7 +131,7 @@ set listchars=tab:>-,trail:·
 
 " Aesthetics {{{
 
-" Used Ethan Schoonover's beautiful Solarized colorscheme.
+" Use Ethan Schoonover's Solarized colorscheme.
 if has("gui_running")
     set background=light
 else
@@ -156,26 +152,26 @@ endif
 
 " Mappings {{{
 
-" Let's make a comma our leader.
+" Make a comma our leader.
 let mapleader = ","
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
-" which is the default
+" which is the default.
 map Y y$
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
-" next search
+" next search.
 nnoremap <C-L> :nohl<CR><C-L>
 
-" Remap jj to <ESC> in insert mode. Carpal tunnel prevention ftw.
+" Remap jj to <ESC> in insert mode.
 inoremap jj <ESC>
 
 " Swap ` and ' for jumping to marks. ` jumps to the correct line _and_
-" column, which seems much more useful. Lets make it easier to type.
+" column, which seems much more useful.
 nnoremap ` '
 nnoremap ' `
 
-" Swap ; and :. Pure awesomeness.
+" Swap ; and :.
 nnoremap : ;
 nnoremap ; :
 

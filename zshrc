@@ -32,7 +32,7 @@ ZSH_THEME="blinks"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(npm heroku brew git python pip zsh-syntax-highlighting gem ruby rbenv osx)
+plugins=(npm taskwarrior heroku brew git python pip zsh-syntax-highlighting osx rbenv gem)
 
 setopt extendedglob
 
@@ -44,20 +44,23 @@ source /usr/local/share/zsh/site-functions/_hub
 # my go packages
 export GOPATH=$HOME/go
 # shouldn't need this but gocode needs it
-# export GOROOT=`brew --prefix go`
+export GOROOT=`brew --prefix go`
 # go cmdline completion
-source `brew --prefix go`/misc/zsh/go
+source `brew --prefix go`/share/zsh/site-functions/_go
 
 # Customize to your needs...
-export PATH=$HOME/bin:$GOPATH/bin:$HOME/.cabal/bin:/usr/texbin:/usr/local/share/python:/usr/local/share/python3:/usr/X11R6/bin:/usr/local/sbin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/Applications/factor:$GOPATH/bin:/Applications/Postgres.app/Contents/MacOS/bin:$HOME/.cabal/bin:/usr/texbin:/usr/local/share/python:/usr/local/share/python3:/usr/local/share/npm/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
 # paths from /etc/paths.d/ (supposedly slows down iTerm2/Terminal.app
 # startup)
 # /etc/paths.d/ was moved to /etc/path.d.backup
 # export PATH=/usr/texbin:/usr/X11/bin:/usr/local/MacGPG2/bin:$PATH
 
-eval "$(rbenv init -)"
-eval "$(hub alias -s)"
+# eval "$(rbenv init -)"
+export RBENV_ROOT=/usr/local/var/rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+if which hub > /dev/null; then eval "$(hub alias -s)"; fi
 
 source /usr/local/share/python/virtualenvwrapper.sh
 
@@ -65,6 +68,10 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/src
 
 export EDITOR='subl -w'
+# export PAGER='vimpager'
 
 export JAVA_OPTS="-Dfile.encoding=UTF-8"
 export FINDBUGS_HOME=/usr/local/Cellar/findbugs/2.0.1/libexec
+
+alias c++11='c++ -std=c++11 -stdlib=libc++'
+alias lighttable='LTCLI=true /Applications/LightTable.app/Contents/MacOS/node-webkit'
