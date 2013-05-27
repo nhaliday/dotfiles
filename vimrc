@@ -65,9 +65,13 @@ set backspace=2
 " If we have no filetype-specific indenting, use the current line's indent.
 set autoindent
 
-" Certain movements take us to the start of the line in vi. This can be
+" Certain movements take us to the start of the line. This can be
 " annoying.
 set nostartofline
+
+" Make splits open below and to the right rather than above and to the left.
+set splitbelow
+set splitright
 
 " Set up the status line
 " set ruler
@@ -152,7 +156,7 @@ endif
 
 " Mappings {{{
 
-" Make a comma our leader.
+" Make a comma the leader.
 let mapleader = ","
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
