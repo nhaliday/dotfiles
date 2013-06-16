@@ -32,24 +32,19 @@ ZSH_THEME="blinks"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(npm taskwarrior heroku brew git python pip zsh-syntax-highlighting osx rbenv gem)
+plugins=(npm heroku brew git python pip zsh-syntax-highlighting osx rbenv gem)
 
 setopt extendedglob
 
 source $ZSH/oh-my-zsh.sh
 
-# add completion for hub for GitHub
-source /usr/local/share/zsh/site-functions/_hub
-
 # my go packages
 export GOPATH=$HOME/go
 # shouldn't need this but gocode needs it
 export GOROOT=`brew --prefix go`
-# go cmdline completion
-source `brew --prefix go`/share/zsh/site-functions/_go
 
 # Customize to your needs...
-export PATH=$HOME/bin:$HOME/Applications/factor:$GOPATH/bin:/Applications/Postgres.app/Contents/MacOS/bin:$HOME/.cabal/bin:/usr/texbin:/usr/local/share/python:/usr/local/share/python3:/usr/local/share/npm/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.cabal/bin:$HOME/Applications/factor:$GOPATH/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/texbin:/usr/local/share/python:/usr/local/share/python3:/usr/local/share/npm/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
 # paths from /etc/paths.d/ (supposedly slows down iTerm2/Terminal.app
 # startup)
@@ -60,9 +55,13 @@ export PATH=$HOME/bin:$HOME/Applications/factor:$GOPATH/bin:/Applications/Postgr
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+# alias hub
 if which hub > /dev/null; then eval "$(hub alias -s)"; fi
 
 source /usr/local/share/python/virtualenvwrapper.sh
+
+# zsh completions
+for fname in /usr/local/share/zsh/site-functions/*; do source $fname; done
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/src
