@@ -54,6 +54,9 @@ export PATH=$HOME/bin:$HOME/.cabal/bin:$HOME/Applications/factor:$GOPATH/bin:/Ap
 # eval "$(rbenv init -)"
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# SSL certificate fix for ruby
+# need to brew install curl-ca-bundle first
+export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
 
 # alias hub
 if which hub > /dev/null; then eval "$(hub alias -s)"; fi
