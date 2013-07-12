@@ -34,6 +34,9 @@ syntax enable
 
 " Important Stuff {{{
 
+" System default shell is fish which tends to cause problems with vim
+set shell=/bin/sh
+
 " One of the most important options to activate. Allows you to switch from an
 " unsaved buffer without saving it first. Also allows you to keep an undo
 " history for multiple files. Vim will complain if you try to quit without
@@ -54,6 +57,9 @@ set incsearch
 " }}}
 
 " Usability {{{
+
+" Yank to clipboard
+set clipboard=unnamed
 
 " Make search case-insensitive iff there are no capital letters.
 set ignorecase
@@ -122,8 +128,8 @@ set nospell
 " Indentation Options {{{
 
 " Indentation settings for soft tabs.
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 " Display trailing whitespace without an eol character.
