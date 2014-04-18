@@ -1,27 +1,20 @@
 " Packages {{{
 
-" Set up pathogen.
-" call pathogen#infect()
-" call pathogen#helptags()
-
-" required for some reason
+" Required for Vundle
+set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'tpope/vim-fugitive'
-Bundle 'altercation/vim-colors-solarized'
-
+Plugin 'tpope/vim-fugitive'
+Plugin 'altercation/vim-colors-solarized'
 
 " }}}
 
 " The Essentials {{{
-
-" vim not vi
-set nocompatible
 
 " Allow vim to determine the type of a file using its name and contents.
 " Use this information for auto-indentation and any plugin that's filetype-specific.
@@ -128,8 +121,8 @@ set nospell
 " Indentation Options {{{
 
 " Indentation settings for soft tabs.
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 
 " Display trailing whitespace without an eol character.
