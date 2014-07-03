@@ -1,16 +1,23 @@
 " Packages {{{
 
+set shell=/usr/local/bin/zsh
+
 " Required for Vundle
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+
 Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end()
+filetype plugin indent on
 
 " }}}
 
@@ -26,9 +33,6 @@ syntax enable
 " }}}
 
 " Important Stuff {{{
-
-" System default shell is fish which tends to cause problems with vim
-set shell=/bin/sh
 
 " One of the most important options to activate. Allows you to switch from an
 " unsaved buffer without saving it first. Also allows you to keep an undo
