@@ -14,7 +14,10 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 
+Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 filetype plugin indent on
@@ -78,7 +81,7 @@ set splitright
 
 " Set up the status line
 " set ruler
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " Always display the status line, even if there is only one window.
 set laststatus=2
@@ -100,8 +103,10 @@ set mouse=a
 " Set the command window height to two lines.
 set cmdheight=2
 
-" Display line numbers.
+" Display the absolute line number for the current line and relative
+" line numbers for the rest.
 set number
+set relativenumber
 
 " Highlight the current line.
 " set cursorline
