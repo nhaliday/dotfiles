@@ -5,9 +5,7 @@ DOTFILES_DIR=$(dirname "$(readlink -f "$0")")
 
 pushd "$DOTFILES_DIR"
 
-stow --target=$HOME zsh
-mkdir -p $HOME/.config
-stow --target=$HOME/.config fish
+mkdir -p $HOME/.config $HOME/.vim/plugged $HOME/.vim/autoload $HOME/.vim/backupfiles $HOME/.vim/swapfiles $HOME/.vim/undofiles
 
 ## Xcode
 # DO: Install Xcode in app store
@@ -25,9 +23,22 @@ fi
 # First time I installed the Freedom app cask I had to add an environment variable: https://apple.stackexchange.com/questions/393481/homebrew-cask-download-failure-ssl-certificate-problem-certificate-has-expired
 brew bundle install --no-lock
 
-/usr/local/opt/fzf/install
+stow --target=$HOME zsh
+stow --target=$HOME/.config config
+stow --targe=$HOME hammerspoon vim
 
-yes N | rbenv install 2.7.1
+yes | /usr/local/opt/fzf/install
+
+if ! output=$(yes N | rbenv install 2.7.1 || true); then
+	if ! echo $output | rg 'already exists'; then
+		rbenv install 2.7.1
+	fi
+fi
 rbenv global 2.7.1
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+vim +PlugUpgrade +PlugInstall +PlugUpdate +qall
 
 popd
