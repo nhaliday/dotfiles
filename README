@@ -1,0 +1,12 @@
+Mid-term goals for this:
+- one click
+- run on fresh factory-installed macOS
+- idempotent and graceful degradation
+- cover everything I always want, don't cover junk that I install but whose utility I'm dubious of
+Long-term goals for this:
+- DRY between mac & linux, work & home
+- tests (including testing UI and installation under various settings using virtualization)
+
+Some unknowns:
+- I'm skeptical of mas and cask. From experience I know the latter does not handle upgrades well.
+- I'm not sure how to handle the stuff that generally goes in ~/Library/Application\ Support (preference, plists), etc.
