@@ -6,6 +6,8 @@ brew "afl-fuzz"
 brew "atool"
 brew "autojump"
 brew "bat"
+brew "openjdk@11"
+brew "bazel"
 brew "binutils"
 brew "sqlite"
 brew "python@3.8"
@@ -57,7 +59,6 @@ brew "mosh"
 brew "neovim"
 brew "nginx"
 brew "openjdk"
-brew "openjdk@11"
 brew "parallel"
 brew "pdfgrep"
 brew "pstree"
@@ -125,6 +126,12 @@ cask "wireshark"
 cask "workflowy"
 mas "Be Focused Pro", id: 961632517
 mas "DaisyDisk", id: 411643860
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
 mas "Microsoft Remote Desktop", id: 1295203466
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
 mas "PDFCombo", id: 1030461463
 mas "PDFOutliner", id: 420874236
+mas "Xcode", id: 497799835
