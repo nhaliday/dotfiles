@@ -21,6 +21,9 @@ fi
 # First time I installed the Freedom app cask I had to add an environment variable: https://apple.stackexchange.com/questions/393481/homebrew-cask-download-failure-ssl-certificate-problem-certificate-has-expired
 brew bundle install --no-lock
 
+sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+
 stow --target=$HOME zsh
 stow --target=$HOME/.config config
 stow --targe=$HOME hammerspoon vim
