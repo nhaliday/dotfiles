@@ -43,6 +43,5 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim +PlugUpgrade +PlugInstall +PlugUpdate +qall
 
 # DO: Install Cisco AnyConnect proxy
-# DO: Copy over ~/Library/Application\ Support/BetterTouchTool
 
 popd
