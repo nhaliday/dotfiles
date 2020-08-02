@@ -10,11 +10,11 @@ mkdir -p $HOME/.config $HOME/.vim/plugged $HOME/.vim/autoload $HOME/.vim/backupf
 # DO: Install Xcode in app store
 # Command-line tools
 if ! output=$(xcode-select --install || true); then
-    # In case where they're already installed, the exit code is 1, but this script doesn't consider that to be an error case, so we work around it.
-    if ! echo "$output" | rg 'already installed'; then
-       # Fail with the same error
-       xcode-select --install
-    fi
+  # In case where they're already installed, the exit code is 1, but this script doesn't consider that to be an error case, so we work around it.
+  if ! echo "$output" | rg 'already installed'; then
+    # Fail with the same error
+    xcode-select --install
+  fi
 fi
 
 [[ -f /usr/local/bin/brew ]] || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -28,9 +28,9 @@ stow --targe=$HOME hammerspoon vim
 yes | /usr/local/opt/fzf/install
 
 if ! output=$(yes N | rbenv install 2.7.1 || true); then
-	if ! echo "$output" | rg 'already exists'; then
-		rbenv install 2.7.1
-	fi
+  if ! echo "$output" | rg 'already exists'; then
+    rbenv install 2.7.1
+  fi
 fi
 rbenv global 2.7.1
 
