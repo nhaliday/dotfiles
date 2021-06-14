@@ -78,6 +78,71 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                      "description": "Map OPTION-A/D to ESC+A/D for NoMachine",
+                      "manipulators": [
+                        {
+                          "from": {
+                            "key_code": "a",
+                            "modifiers": {
+                              "mandatory": [
+                                "option"
+                              ],
+                              "optional": [
+                                "any"
+                              ]
+                            }
+                          },
+                          "to": [
+                            {
+                              "key_code": "a",
+                              "modifiers": [
+                                "escape"
+                              ]
+                            }
+                          ],
+                          "conditions": [
+                            {
+                              "type": "frontmost_application_if",
+                              "bundle_identifiers": [
+                                "^com\\.nomachine\\.nxdock$"
+                              ]
+                            }
+                          ],
+                          "type": "basic"
+                        },
+                        {
+                          "from": {
+                            "key_code": "d",
+                            "modifiers": {
+                              "mandatory": [
+                                "option"
+                              ],
+                              "optional": [
+                                "any"
+                              ]
+                            }
+                          },
+                          "to": [
+                            {
+                              "key_code": "d",
+                              "modifiers": [
+                                "escape"
+                              ]
+                            }
+                          ],
+                          "conditions": [
+                            {
+                              "type": "frontmost_application_if",
+                              "bundle_identifiers": [
+                                "^com\\.nomachine\\.nxdock$"
+                              ]
+                            }
+                          ],
+                          "type": "basic"
+                        }
+                      ]
                     }
                 ]
             },

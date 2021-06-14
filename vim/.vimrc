@@ -19,7 +19,7 @@ set expandtab
 set backspace=indent,eol,start
 " Adding unnamedplus seems to make things work more consistently in my current
 " setting (PuTTY + tmux).
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 filetype indent on
 " Added the below line at the request of vimtex.
