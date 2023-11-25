@@ -56,6 +56,7 @@ brew "watch"
 brew "wget"
 brew "xsv"
 brew "youtube-dl"
+cask "1password7"
 cask "adobe-acrobat-pro"
 cask "adobe-acrobat-reader"
 cask "airtable"
@@ -93,7 +94,6 @@ cask "vlc"
 cask "workflowy"
 cask "zoom"
 cask "zotero"
-mas "1Password 7", id: 1333542190
 mas "AdGuard for Safari", id: 1440147259
 mas "Bear", id: 1091189122
 mas "DaisyDisk", id: 411643860
