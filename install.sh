@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# NOTE!: This is out of date. I am planning on using Ansible instead of Bash.
+
 set -eux
 DOTFILES_DIR=$(dirname "$(readlink -f "$0")")
 
