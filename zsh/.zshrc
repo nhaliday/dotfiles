@@ -1,5 +1,7 @@
 export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 
+source <(starship init zsh)
+
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

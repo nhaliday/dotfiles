@@ -2,6 +2,8 @@ fish_add_path /opt/homebrew/sbin /opt/homebrew/bin
 
 [ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
 
+starship init fish | source
+
 # I no longer have this keg installed.
 # set -g RUBY_CONFIGURE_OPTS "--with-openssl-dir="(brew --prefix openssl@1.1)
 
