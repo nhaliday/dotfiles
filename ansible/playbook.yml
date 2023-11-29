@@ -1,0 +1,17 @@
+#!/usr/bin/env ansible-playbook
+
+---
+- name: Check working directory
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Check working directory
+      ansible.builtin.debug:
+        msg: Check we are running in the directory of the script.
+      failed_when: not ansible_env.PWD.endswith('/.dotfiles/ansible')
+
+- name: Apply role
+  hosts: localhost
+  connection: local
+  roles:
+    - nick_mac

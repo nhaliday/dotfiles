@@ -1,0 +1,12 @@
+---
+- name: Add Fish to standard login shells
+  become: true
+  become_method: ansible.builtin.sudo
+  # This worked in at least one run, but now I'm getting errors
+  # about sudo requiring a password. Odd.
+  ansible.builtin.lineinfile:
+    path: /etc/shells
+    line: /opt/homebrew/bin/fish
+
+- name: Set login shell to Fish
+  ansible.builtin.command: chsh -s /opt/homebrew/bin/fish
