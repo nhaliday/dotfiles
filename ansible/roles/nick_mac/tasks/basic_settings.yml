@@ -4,9 +4,14 @@
   become_method: ansible.builtin.sudo
   # This worked in at least one run, but now I'm getting errors
   # about sudo requiring a password. Odd.
+  #
+  # Can be worked around with
+  # ansible-playbook --ask-become-pass.
   ansible.builtin.lineinfile:
     path: /etc/shells
     line: /opt/homebrew/bin/fish
 
 - name: Set login shell to Fish
-  ansible.builtin.command: chsh -s /opt/homebrew/bin/fish
+  become: true
+  become_method: ansible.builtin.sudo
+  ansible.builtin.command: chsh -s /opt/homebrew/bin/fish nick
