@@ -15,3 +15,5 @@
   become: true
   become_method: ansible.builtin.sudo
   ansible.builtin.command: chsh -s /opt/homebrew/bin/fish nick
+  when: ansible_facts['user_shell'] != "/opt/homebrew/bin/fish"
+  changed_when: ansible_facts['user_shell'] == "/opt/homebrew/bin/fish"
