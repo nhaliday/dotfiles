@@ -175,7 +175,7 @@ let g:ale_cpp_clang_options = '-std=gnu++17 -Wall'
 let g:ale_cpp_gcc_options = g:ale_cpp_clang_options
 let g:ale_linters = {'cpp': []}
 
-let g:ale_fixers = {'cpp': ['clang-format'], 'proto': ['clang-format'], 'rust': ['rustfmt']}
+let g:ale_fixers = {'cpp': ['clang-format'], 'proto': ['clang-format'], 'rust': ['rustfmt'], 'python': ['black']}
 let g:ale_fix_on_save = 1
 
 "Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer'}
