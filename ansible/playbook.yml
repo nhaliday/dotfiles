@@ -10,6 +10,14 @@
         msg: Check we are running in the directory of the script.
       failed_when: not ansible_env.PWD.endswith('/.dotfiles/ansible')
 
+- name: Show facts available on the system
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Show facts available on the system
+      ansible.builtin.debug:
+        var: ansible_facts
+
 - name: Apply role
   hosts: localhost
   connection: local
