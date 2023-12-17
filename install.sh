@@ -19,30 +19,31 @@ if ! output=$(xcode-select --install || true); then
   fi
 fi
 
-[[ -f /usr/local/bin/brew ]] || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-# First time I installed the Freedom app cask I had to add an environment variable: https://apple.stackexchange.com/questions/393481/homebrew-cask-download-failure-ssl-certificate-problem-certificate-has-expired
-brew bundle install --no-lock
+[[ -f /opt/homebrew/bin/brew ]] || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+# Be lenient on brew failures.
+brew bundle install --no-lock || true
+
+[[ -x $HOME/.cargo/bin/rustup ]] || rustup-init -y
+rustup component add rust-analyzer
+
+opam init --shell=fish --auto-setup
+opam install dune ocaml-lsp-server odoc ocamlformat utop
+
+sudo ln -sfn "$(brew --prefix)/opt/openjdk/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk.jdk
 
 stow --target=$HOME zsh
 stow --target=$HOME/.config config
 stow --targe=$HOME hammerspoon vim
 
-yes | /usr/local/opt/fzf/install
-
-if ! output=$(yes N | rbenv install 2.7.1 || true); then
-  if ! echo "$output" | rg 'already exists'; then
-    rbenv install 2.7.1
-  fi
-fi
-rbenv global 2.7.1
+yes | "$(brew --prefix)/opt/fzf/install"
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 vim +PlugUpgrade +PlugInstall +PlugUpdate +qall
+
+nvim +PaqSync +qall
 
 # DO: Install Cisco AnyConnect proxy
 

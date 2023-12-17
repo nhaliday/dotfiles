@@ -4,10 +4,10 @@ fish_add_path /opt/homebrew/sbin /opt/homebrew/bin
 
 starship init fish | source
 
-# I no longer have this keg installed.
-# set -g RUBY_CONFIGURE_OPTS "--with-openssl-dir="(brew --prefix openssl@1.1)
-
 status --is-interactive; and source (rbenv init -|psub)
 
 status is-login; and pyenv init --path | source
 status is-interactive; and pyenv init - | source
+
+# opam configuration
+source /Users/nick/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
