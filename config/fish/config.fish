@@ -11,3 +11,5 @@ status is-interactive; and pyenv init - | source
 
 # opam configuration
 source /Users/nick/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+
+set --global --export EDITOR nvim
