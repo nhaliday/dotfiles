@@ -215,6 +215,10 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "buildifier",
+					args = {
+						"-path",
+						formatter_nvim_utils.escape_path(formatter_nvim_utils.get_current_buffer_file_name()),
+					},
 					stdin = true,
 				}
 			end,
