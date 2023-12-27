@@ -253,7 +253,7 @@ require("formatter").setup({
 				}
 			end,
 		},
-		py = {
+		python = {
 			require("formatter.filetypes.python").black,
 		},
 		rust = {
