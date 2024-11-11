@@ -7,18 +7,23 @@
 local PACKAGES = {
 	"savq/paq-nvim",
 
+	"KenN7/vim-arsync",
 	"elihunter173/dirbuf.nvim",
+	"ellisonleao/gruvbox.nvim",
 	"ibhagwan/fzf-lua",
 	"lewis6991/gitsigns.nvim",
-	"morhetz/gruvbox",
 	"nvim-lua/plenary.nvim",
+	"nvim-tree/nvim-tree.lua",
 	"ojroques/nvim-hardline",
+	"prabirshrestha/async.vim",
+	"sindrets/winshift.nvim",
 	"tpope/vim-fugitive",
 	"tpope/vim-repeat",
 
 	"AndrewRadev/sideways.vim",
 	"PeterRincker/vim-argumentative",
 	"RRethy/vim-illuminate",
+	"easymotion/vim-easymotion",
 	"embear/vim-foldsearch",
 	"gbprod/substitute.nvim",
 	"ggandor/flit.nvim",
@@ -29,6 +34,7 @@ local PACKAGES = {
 	"kana/vim-textobj-user",
 	"machakann/vim-sandwich",
 	"milkypostman/vim-togglelist",
+	"pianohacker/vim-textobj-indented-paragraph",
 	"terrortylor/nvim-comment",
 	"tpope/vim-abolish",
 
@@ -46,22 +52,22 @@ local PACKAGES = {
 	"mfussenegger/nvim-lint",
 	"mhartington/formatter.nvim",
 	"neovim/nvim-lspconfig",
-	"nvim-treesitter/nvim-treesitter",
-	"rafamadriz/friendly-snippets",
+	{ "nvim-treesitter/nvim-treesitter", branch = "v0.9.1" }, -- Pinned due to errors in latest version.
 	"rcarriga/nvim-dap-ui",
 }
 
+local PAQS_PATH = vim.fn.stdpath("data") .. "/site/pack/paqs"
+
 local function bootstrap_paq()
-	local path = vim.fn.stdpath("data") .. "/site/pack/paqs/start/paq-nvim"
+	local path = PAQS_PATH .. "/start/paq-nvim"
 	if vim.fn.empty(vim.fn.glob(path)) > 0 then
 		vim.fn.system({ "git", "clone", "--depth=1", "https://github.com/savq/paq-nvim.git", path })
 		vim.cmd("packadd paq-nvim")
-		require("paq")(PACKAGES).install()
 	end
 end
 
 bootstrap_paq()
-require("paq")(PACKAGES)
+require("paq"):setup({ path = PAQS_PATH .. "/" })(PACKAGES)
 
 ----------------------------------------------------------------------------------------------------------------
 --                                             functions                                                      --
@@ -92,9 +98,12 @@ vim.opt.number = true
 vim.opt.hidden = false
 vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case --column --line-number"
 
-vim.opt.background = "dark"
+-- Disable netrw per nvim-tree.lua's suggestion.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- vim.opt.background = "dark"
 -- vim.opt.termguicolors = true
-vim.cmd([[colorscheme gruvbox]])
 
 ----------------------------------------------------------------------------------------------------------------
 --                                          general mappings                                                  --
@@ -144,10 +153,31 @@ map("n", "<leader>c", '"_c')
 map("x", "<leader>c", '"_c')
 
 ----------------------------------------------------------------------------------------------------------------
+--                                      plugin-driven settings                                                --
+----------------------------------------------------------------------------------------------------------------
+
+-- local gruvbox = require("gruvbox")
+-- gruvbox.setup({
+-- 	-- XTerm does not handle italics well.
+-- 	italic = vim.tbl_map(function()
+-- 		return false
+-- 	end, gruvbox.config.italic),
+-- })
+-- vim.cmd([[colorscheme gruvbox]])
+
+----------------------------------------------------------------------------------------------------------------
 --                                             hardline                                                       --
 ----------------------------------------------------------------------------------------------------------------
 
 require("hardline").setup({})
+
+----------------------------------------------------------------------------------------------------------------
+--                                           nvim-tree.lua                                                    --
+----------------------------------------------------------------------------------------------------------------
+
+require("nvim-tree").setup({})
+
+map("n", "<leader>h", "<cmd>NvimTreeFindFile<cr>")
 
 ----------------------------------------------------------------------------------------------------------------
 --                                          nvim-treesitter                                                   --
@@ -193,6 +223,13 @@ require("fzf-lua").setup({
 	},
 })
 
+function fzf_plugin_lua_files()
+	require("fzf-lua").fzf_exec(
+		"find " .. PAQS_PATH .. " -type f -name '*.lua'",
+		{ actions = require("fzf-lua").defaults.actions.files }
+	)
+end
+
 map("n", "<enter>", '<cmd>lua require("fzf-lua").lsp_definitions({ jump_to_single_result = true })<cr>')
 map("n", "<leader>f", "<cmd>FzfLua files<cr>")
 map("n", "<leader>b", "<cmd>FzfLua buffers<cr>")
@@ -203,9 +240,10 @@ map("n", "<leader><leader>a", "<cmd>FzfLua grep_last<cr>")
 map("n", "<leader>g", "<cmd>FzfLua lsp_live_workspace_symbols<cr>")
 map("n", "<leader><leader>g", "<cmd>FzfLua live_grep_native<cr>")
 map("n", "<leader><leader>f", '<cmd>lua require("fzf-lua").lsp_code_actions({ winopts = { fullscreen = false } })<cr>')
+map("n", "<leader>p", "<cmd>lua fzf_plugin_lua_files()<cr>")
 
 ----------------------------------------------------------------------------------------------------------------
---                                                 formatter.nvim                                             --
+--                                                 formatter.vim                                              --
 ----------------------------------------------------------------------------------------------------------------
 
 local formatter_nvim_utils = require("formatter.util")
@@ -226,7 +264,7 @@ require("formatter").setup({
 		cpp = {
 			function()
 				return {
-					exe = "clang-format",
+					exe = "/usr/local/htgm-llvm-16-0-3-gcc-13-1-0/bin/clang-format",
 					args = {
 						"--assume-filename",
 						formatter_nvim_utils.escape_path(formatter_nvim_utils.get_current_buffer_file_path()),
@@ -238,39 +276,6 @@ require("formatter").setup({
 		},
 		lua = {
 			require("formatter.filetypes.lua").stylua,
-		},
-		ocaml = {
-			function()
-				return {
-					exe = "ocamlformat",
-					args = {
-						"--enable-outside-detected-project",
-						"--name",
-						formatter_nvim_utils.escape_path(formatter_nvim_utils.get_current_buffer_file_path()),
-						"-",
-					},
-					stdin = true,
-				}
-			end,
-		},
-		python = {
-			require("formatter.filetypes.python").black,
-		},
-		rust = {
-			require("formatter.filetypes.rust").rustfmt,
-		},
-		swift = {
-			function()
-				return {
-					exe = "swiftformat",
-					args = {
-						"--stdinpath",
-						formatter_nvim_utils.escape_path(formatter_nvim_utils.get_current_buffer_file_path()),
-						"stdin",
-					},
-					stdin = true,
-				}
-			end,
 		},
 	},
 })
@@ -291,14 +296,9 @@ require("lint").linters.shellcheck_for_zsh = vim.tbl_extend("force", shellcheck_
 	args = vim.list_extend({ "--shell=bash" }, shellcheck_linter.args),
 })
 
-local luacheck_linter = require("lint").linters.luacheck
-require("lint").linters.luacheck_for_mac = vim.tbl_extend("force", luacheck_linter, {
-	args = vim.list_extend({ "--default-config=/Users/nick/.config/luacheck/.luacheckrc" }, luacheck_linter.args),
-})
-
 require("lint").linters_by_ft = {
 	bzl = { "buildifier" },
-	lua = { "luacheck_for_mac" },
+	lua = { "luacheck" },
 	py = { "flake8" },
 	sh = { "shellcheck" },
 	vim = { "vint" },
@@ -322,13 +322,44 @@ require("cmp_nvim_lsp_signature_help")
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "ccls", "pyright", "rust_analyzer", "ocamllsp" }
+local servers = { "ccls" }
 local lspconfig = require("lspconfig")
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		capabilities = capabilities,
 	})
 end
+-- lspconfig.lua_ls.setup({
+-- 	capabilities = capabilities,
+-- 	on_init = function(client)
+-- 		local path = client.workspace_folders[1].name
+-- 		if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+-- 			client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
+-- 				Lua = {
+-- 					runtime = {
+-- 						-- Tell the language server which version of Lua you're using
+-- 						-- (most likely LuaJIT in the case of Neovim)
+-- 						version = "LuaJIT",
+-- 					},
+-- 					-- Make the server aware of Neovim runtime files
+-- 					workspace = {
+-- 						checkThirdParty = false,
+-- 						library = {
+-- 							vim.env.VIMRUNTIME,
+-- 							-- "${3rd}/luv/library"
+-- 							-- "${3rd}/busted/library",
+-- 						},
+-- 						-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+-- 						-- library = vim.api.nvim_get_runtime_file("", true)
+-- 					},
+-- 				},
+-- 			})
+--
+-- 			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+-- 		end
+-- 		return true
+-- 	end,
+-- })
 
 local cmp = require("cmp")
 cmp.setup({
@@ -480,7 +511,18 @@ map("n", "<leader><leader>i", "<cmd>lua cppman_lookup()<cr>gg", { silent = true 
 --                                              fidget                                                        --
 ----------------------------------------------------------------------------------------------------------------
 
-require("fidget").setup({})
+require("fidget").setup({
+	notification = {
+		window = {
+			align = "top",
+		},
+	},
+	integration = {
+		["nvim-tree"] = {
+			enable = true,
+		},
+	},
+})
 
 ----------------------------------------------------------------------------------------------------------------
 --                                           vim-togglelist                                                   --
@@ -497,3 +539,10 @@ vim.cmd("autocmd FileType qf set winheight=30")
 
 map("n", "<leader><left>", "<cmd>SidewaysLeft<cr>")
 map("n", "<leader><right>", "<cmd>SidewaysRight<cr>")
+
+----------------------------------------------------------------------------------------------------------------
+--                                            easymotion                                                      --
+----------------------------------------------------------------------------------------------------------------
+
+vim.g.EasyMotion_do_mapping = true
+map("n", "\\", "<Plug>(easymotion-prefix)")
