@@ -19,3 +19,5 @@ set -gx PATH $PATH /Users/nick/.cache/lm-studio/bin
 
 set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
+
+set -gx PATH $PATH $HOME/.local/bin
