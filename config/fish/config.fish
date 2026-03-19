@@ -16,3 +16,6 @@ set --global --export EDITOR nvim
 
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/nick/.cache/lm-studio/bin
+
+set -gx GOPATH $HOME/go
+set -gx PATH $GOPATH/bin $PATH
