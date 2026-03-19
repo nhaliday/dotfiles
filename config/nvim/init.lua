@@ -102,7 +102,7 @@ vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case --column --line-number
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- vim.opt.background = "dark"
+vim.opt.background = "dark"
 -- vim.opt.termguicolors = true
 
 ----------------------------------------------------------------------------------------------------------------
@@ -156,14 +156,14 @@ map("x", "<leader>c", '"_c')
 --                                      plugin-driven settings                                                --
 ----------------------------------------------------------------------------------------------------------------
 
--- local gruvbox = require("gruvbox")
--- gruvbox.setup({
--- 	-- XTerm does not handle italics well.
--- 	italic = vim.tbl_map(function()
--- 		return false
--- 	end, gruvbox.config.italic),
--- })
--- vim.cmd([[colorscheme gruvbox]])
+local gruvbox = require("gruvbox")
+gruvbox.setup({
+	-- XTerm does not handle italics well.
+	italic = vim.tbl_map(function()
+		return false
+	end, gruvbox.config.italic),
+})
+vim.cmd([[colorscheme gruvbox]])
 
 ----------------------------------------------------------------------------------------------------------------
 --                                             hardline                                                       --
