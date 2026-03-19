@@ -54,6 +54,9 @@ local PACKAGES = {
 	"neovim/nvim-lspconfig",
 	{ "nvim-treesitter/nvim-treesitter", branch = "v0.9.1" }, -- Pinned due to errors in latest version.
 	"rcarriga/nvim-dap-ui",
+
+	-- { "zbirenbaum/copilot.lua", opt = true },
+	-- { "zbirenbaum/copilot-cmp", opt = true },
 }
 
 local PAQS_PATH = vim.fn.stdpath("data") .. "/site/pack/paqs"
@@ -424,6 +427,7 @@ cmp.setup({
 		{ name = "nvim_lsp", group_index = 1 },
 		{ name = "vsnip", group_index = 1 },
 		{ name = "buffer", group_index = 2 },
+		-- { name = "copilot", group_index = 2 },
 		{ name = "nvim_lsp_signature_help", group_index = 3 },
 		{ name = "path", group_index = 4 },
 	}),
@@ -431,6 +435,30 @@ cmp.setup({
 
 map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float({focus = false})<cr>")
 map("n", "<leader>i", "<cmd>lua vim.lsp.buf.hover()<cr>")
+
+-- Prevent accidental writing after, e.g., LSP jumps.
+local third_party_packages_read_only_group = vim.api.nvim_create_augroup("ThirdPartyPackagesReadOnly", { clear = true })
+for _, pattern in ipairs({
+	os.getenv("HOME") .. "/.local/share/nvim/*",
+	-- Pyright system stubs, Go system source, etc., e.g.,  /opt/homebrew/Cellar/pyright/1.1.388/libexec/*
+	"/opt/homebrew/Cellar/*/*/libexec/*",
+	os.getenv("HOME") .. "/Library/Caches/pypoetry/virtualenvs/*",
+	os.getenv("HOME") .. "/.rustup/*",
+	os.getenv("HOME") .. "/.cargo/*",
+	os.getenv("HOME") .. "/.conan2/*",
+	-- C/C++ system headers
+	"/Applications/Xcode.app/*",
+}) do
+	vim.api.nvim_create_autocmd("BufRead", {
+		group = third_party_packages_read_only_group,
+		pattern = pattern,
+		callback = function(ev)
+			local buf = ev.buf
+			vim.bo[buf].readonly = true
+			vim.bo[buf].modifiable = false
+		end,
+	})
+end
 
 ----------------------------------------------------------------------------------------------------------------
 --                                            nvim-comment                                                    --
@@ -576,3 +604,18 @@ map("n", "<leader><right>", "<cmd>SidewaysRight<cr>")
 
 vim.g.EasyMotion_do_mapping = true
 map("n", "\\", "<Plug>(easymotion-prefix)")
+
+-- !!! copilot.lua !!!
+
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+-- 	callback = function()
+-- 		vim.cmd([[packadd copilot.lua]])
+-- 		vim.cmd([[packadd copilot-cmp ]])
+-- 		require("copilot").setup({
+-- 			suggestion = { enabled = false },
+-- 			panel = { enabled = false },
+-- 		})
+-- 		require("copilot_cmp").setup()
+-- 	end,
+-- 	once = true,
+-- })
