@@ -13,3 +13,6 @@ status is-interactive; and pyenv init - | source
 source /Users/nick/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
 set --global --export EDITOR nvim
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/nick/.cache/lm-studio/bin
