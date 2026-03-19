@@ -1,0 +1,6 @@
+---
+- name: Download patched DTruss
+  ansible.builtin.get_url:
+    url: https://gitlab.com/pmdj/macos-dtrace-scripts/-/raw/main/dtruss?ref_type=heads
+    dest: ~/bin/dtruss
+    mode: '0755'
