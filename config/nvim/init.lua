@@ -264,7 +264,7 @@ require("formatter").setup({
 		cpp = {
 			function()
 				return {
-					exe = "/usr/local/htgm-llvm-16-0-3-gcc-13-1-0/bin/clang-format",
+					exe = "clang-format",
 					args = {
 						"--assume-filename",
 						formatter_nvim_utils.escape_path(formatter_nvim_utils.get_current_buffer_file_path()),
@@ -276,6 +276,27 @@ require("formatter").setup({
 		},
 		lua = {
 			require("formatter.filetypes.lua").stylua,
+		},
+		python = {
+			require("formatter.filetypes.python").black,
+		},
+		rust = {
+			function()
+				return {
+					exe = "rustfmt",
+					args = {
+						"--edition=2024",
+					},
+					stdin = true,
+				}
+			end,
+		},
+		go = {
+			require("formatter.filetypes.go").gofmt,
+			require("formatter.filetypes.go").goimports,
+		},
+		cmake = {
+			require("formatter.filetypes.cmake").cmakeformat,
 		},
 	},
 })
@@ -362,6 +383,15 @@ end
 -- })
 
 local cmp = require("cmp")
+
+local has_words_before = function()
+	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+		return false
+	end
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+end
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -372,14 +402,14 @@ cmp.setup({
 		["<cr>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
 		["<c-space>"] = cmp.mapping.complete(),
 		["<tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
+			if cmp.visible() and has_words_before() then
 				cmp.select_next_item()
 			else
 				fallback()
 			end
 		end, { "i", "s" }),
 		["<s-tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
+			if cmp.visible() and has_words_before() then
 				cmp.select_prev_item()
 			else
 				fallback()
