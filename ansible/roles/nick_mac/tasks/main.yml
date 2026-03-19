@@ -4,6 +4,3 @@
 
 - name: Config symlinks
   ansible.builtin.import_tasks: config.yml
-
-- name: Utils
-  ansible.builtin.import_tasks: utils.yml
