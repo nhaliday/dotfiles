@@ -1,0 +1,17 @@
+---
+- name: Find config items to symlink
+  ansible.builtin.find:
+    paths: "{{ playbook_dir }}/../config"
+    file_type: any
+    recurse: false
+  register: config_items
+
+- name: Symlink config items to ~/.config
+  ansible.builtin.file:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_env.HOME }}/.config/{{ item.path | basename }}"
+    state: link
+    force: true
+  loop: "{{ config_items.files }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
