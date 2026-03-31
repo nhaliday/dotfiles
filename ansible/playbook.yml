@@ -22,4 +22,5 @@
   hosts: localhost
   connection: local
   roles:
-    - nick_mac
+    - role: nick_mac
+      when: ansible_facts["os_family"] == "Darwin"
