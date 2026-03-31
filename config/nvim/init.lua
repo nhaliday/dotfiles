@@ -48,6 +48,7 @@ local PACKAGES = {
 	"mhartington/formatter.nvim",
 	"neovim/nvim-lspconfig",
 	"nvim-treesitter/nvim-treesitter",
+	"mfussenegger/nvim-ansible",
 }
 
 local PAQS_PATH = vim.fn.stdpath("data") .. "/site/pack/paqs"
@@ -339,7 +340,7 @@ require("cmp_nvim_lsp_signature_help")
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "clangd", "pyright", "rust_analyzer", "gopls" }
+local servers = { "clangd", "pyright", "rust_analyzer", "ansiblels" }
 require("lspconfig")
 for _, server in ipairs(servers) do
 	vim.lsp.config(server, {
