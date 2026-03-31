@@ -48,9 +48,6 @@ local PACKAGES = {
 	"mhartington/formatter.nvim",
 	"neovim/nvim-lspconfig",
 	{ "nvim-treesitter/nvim-treesitter", branch = "v0.9.1" }, -- Pinned due to errors in latest version.
-
-	-- { "zbirenbaum/copilot.lua", opt = true },
-	-- { "zbirenbaum/copilot-cmp", opt = true },
 }
 
 local PAQS_PATH = vim.fn.stdpath("data") .. "/site/pack/paqs"
@@ -421,7 +418,6 @@ cmp.setup({
 		{ name = "nvim_lsp", group_index = 1 },
 		{ name = "vsnip", group_index = 1 },
 		{ name = "buffer", group_index = 2 },
-		-- { name = "copilot", group_index = 2 },
 		{ name = "nvim_lsp_signature_help", group_index = 3 },
 		{ name = "path", group_index = 4 },
 	}),
@@ -536,18 +532,3 @@ map("n", "<leader><right>", "<cmd>SidewaysRight<cr>")
 
 vim.g.EasyMotion_do_mapping = true
 map("n", "\\", "<Plug>(easymotion-prefix)")
-
--- !!! copilot.lua !!!
-
--- vim.api.nvim_create_autocmd("InsertEnter", {
--- 	callback = function()
--- 		vim.cmd([[packadd copilot.lua]])
--- 		vim.cmd([[packadd copilot-cmp ]])
--- 		require("copilot").setup({
--- 			suggestion = { enabled = false },
--- 			panel = { enabled = false },
--- 		})
--- 		require("copilot_cmp").setup()
--- 	end,
--- 	once = true,
--- })
