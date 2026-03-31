@@ -47,7 +47,7 @@ local PACKAGES = {
 	"mfussenegger/nvim-lint",
 	"mhartington/formatter.nvim",
 	"neovim/nvim-lspconfig",
-	{ "nvim-treesitter/nvim-treesitter", branch = "v0.9.1" }, -- Pinned due to errors in latest version.
+	"nvim-treesitter/nvim-treesitter",
 }
 
 local PAQS_PATH = vim.fn.stdpath("data") .. "/site/pack/paqs"
@@ -177,9 +177,12 @@ map("n", "<leader>h", "<cmd>NvimTreeFindFile<cr>")
 --                                          nvim-treesitter                                                   --
 ----------------------------------------------------------------------------------------------------------------
 
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "vim", "lua", "cpp", "python" },
-	highlight = { enable = true },
+require("nvim-treesitter").install({ "vim", "lua", "cpp", "python", "rust" })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "vim", "lua", "cpp", "python", "rust" },
+	callback = function()
+		vim.treesitter.start()
+	end,
 })
 
 ----------------------------------------------------------------------------------------------------------------
@@ -330,7 +333,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 ----------------------------------------------------------------------------------------------------------------
---                                          lspconfig and nvim-cmp                                            --
+--                                         lsp config and nvim-cmp                                            --
 ----------------------------------------------------------------------------------------------------------------
 
 require("cmp_nvim_lsp_signature_help")
@@ -338,12 +341,13 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local servers = { "clangd", "pyright", "rust_analyzer", "gopls" }
-local lspconfig = require("lspconfig")
-for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
+require("lspconfig")
+for _, server in ipairs(servers) do
+	vim.lsp.config(server, {
 		capabilities = capabilities,
 	})
 end
+vim.lsp.enable(servers)
 
 local cmp = require("cmp")
 
