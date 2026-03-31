@@ -26,14 +26,11 @@ local PACKAGES = {
 	"easymotion/vim-easymotion",
 	"embear/vim-foldsearch",
 	"gbprod/substitute.nvim",
-	"ggandor/flit.nvim",
-	"ggandor/leap.nvim",
 	"johngkhs/quickfix-reflector.vim",
 	"johngkhs/vim-textobj-variable-segment",
 	"kana/vim-altr",
 	"kana/vim-textobj-user",
 	"machakann/vim-sandwich",
-	"milkypostman/vim-togglelist",
 	"pianohacker/vim-textobj-indented-paragraph",
 	"terrortylor/nvim-comment",
 	"tpope/vim-abolish",
@@ -47,13 +44,10 @@ local PACKAGES = {
 	"hrsh7th/vim-vsnip",
 	"hrsh7th/vim-vsnip-integ",
 	"j-hui/fidget.nvim",
-	"m-pilia/vim-ccls",
-	"mfussenegger/nvim-dap",
 	"mfussenegger/nvim-lint",
 	"mhartington/formatter.nvim",
 	"neovim/nvim-lspconfig",
 	{ "nvim-treesitter/nvim-treesitter", branch = "v0.9.1" }, -- Pinned due to errors in latest version.
-	"rcarriga/nvim-dap-ui",
 
 	-- { "zbirenbaum/copilot.lua", opt = true },
 	-- { "zbirenbaum/copilot-cmp", opt = true },
@@ -470,13 +464,6 @@ map("n", "<leader>,", ":CommentToggle<cr>")
 map("v", "<leader>,", ":'<,'>CommentToggle<cr>")
 
 ----------------------------------------------------------------------------------------------------------------
---                                           leap and flit                                                    --
-----------------------------------------------------------------------------------------------------------------
-
-require("leap").add_default_mappings()
-require("flit").setup({})
-
-----------------------------------------------------------------------------------------------------------------
 --                                         substitute.nvim                                                    --
 ----------------------------------------------------------------------------------------------------------------
 
@@ -504,52 +491,6 @@ vim.cmd([[call altr#define('%/%.h', '%/priv/%.h', '%/%.cpp', '%/ut/%_test.cpp', 
 vim.cmd([[call altr#define('%.h', '%.cpp')]])
 map("n", "<leader>.", "<cmd>call altr#forward()<cr>")
 map("n", "<leader>/", "<cmd>call altr#back()<cr>")
-
-----------------------------------------------------------------------------------------------------------------
---                                             nvim-dap                                                       --
-----------------------------------------------------------------------------------------------------------------
-
-local dap = require("dap")
-dap.adapters.lldb = {
-	type = "executable",
-	command = "</path/to/lldb-vscode>",
-	name = "lldb",
-}
-
-dap.configurations.cpp = {
-	{
-		name = "Launch",
-		type = "lldb",
-		request = "launch",
-		program = vim.fn.getcwd() .. "/a.out",
-		cwd = "${workspaceFolder}",
-		stopOnEntry = false,
-		args = { "-enable-pretty-printing" },
-		runInTerminal = false,
-	},
-}
-
-require("dapui").setup({
-	layouts = {
-		{
-			elements = { "scopes" },
-			size = 0.35,
-			position = "left",
-		},
-		{
-			elements = { "repl" },
-			size = 0.35,
-			position = "bottom",
-		},
-	},
-})
-
-map("n", "<leader><leader>l", "<cmd>DapContinue<cr>")
-map("n", "<leader><leader>j", "<cmd>DapStepOver<cr>")
-map("n", "<leader><leader>k", "<cmd>DapStepInto<cr>")
-map("n", "<leader><leader>t", "<cmd>DapTerminate<cr>")
-map("n", "<leader><leader>b", "<cmd>DapToggleBreakpoint<cr>")
-map("n", "<leader><leader>p", '<cmd>lua require("dapui").toggle()<cr>')
 
 ----------------------------------------------------------------------------------------------------------------
 --                                              cppman                                                        --
@@ -581,15 +522,6 @@ require("fidget").setup({
 		},
 	},
 })
-
-----------------------------------------------------------------------------------------------------------------
---                                           vim-togglelist                                                   --
-----------------------------------------------------------------------------------------------------------------
-
-vim.g.toggle_list_no_mappings = true
-map("n", "<leader>a", "<cmd>call ToggleQuickfixList()<cr>")
-vim.cmd("autocmd FileType qf wincmd J")
-vim.cmd("autocmd FileType qf set winheight=30")
 
 ----------------------------------------------------------------------------------------------------------------
 --                                            sideways.vim                                                    --
