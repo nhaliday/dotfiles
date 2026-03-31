@@ -1,4 +1,4 @@
-#!/usr/bin/env ansible-playbook --ask-become-pass
+#!/usr/bin/env -S ansible-playbook --ask-become-pass
 
 ---
 - name: Check working directory
