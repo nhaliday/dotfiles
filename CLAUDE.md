@@ -28,7 +28,7 @@ luacheck config/nvim/
 ## Repo Layout
 
 Configs are deployed two ways:
-- **`config/`** — items here are symlinked into `~/.config/` by the Ansible `config.yml` task (each top-level entry becomes a symlink, e.g. `config/nvim` → `~/.config/nvim`)
+- **`config/`** — items here are symlinked into `~/.config/` by the Ansible `config.yml` task using GNU stow for automatic tree folding.
 - **`zsh/`, `vim/`, `hammerspoon/`** — historically deployed via GNU Stow (`stow --target=$HOME <dir>`), which symlinks dotfiles (`.zshrc`, `.vimrc`, `.hammerspoon/`) into `$HOME`
 
 ### Ansible structure
