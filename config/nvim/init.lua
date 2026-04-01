@@ -151,13 +151,6 @@ map("x", "<leader>c", '"_c')
 --                                      plugin-driven settings                                                --
 ----------------------------------------------------------------------------------------------------------------
 
-local gruvbox = require("gruvbox")
-gruvbox.setup({
-	-- XTerm does not handle italics well.
-	italic = vim.tbl_map(function()
-		return false
-	end, gruvbox.config.italic),
-})
 vim.cmd([[colorscheme gruvbox]])
 
 ----------------------------------------------------------------------------------------------------------------
@@ -219,6 +212,12 @@ require("fzf-lua").setup({
 	fzf_opts = {
 		["-m --bind"] = "ctrl-a:toggle-all",
 	},
+	lsp = {
+		symbols = {
+			child_prefix = true,
+			parent_postfix = ".",
+		},
+	},
 })
 
 function fzf_plugin_lua_files()
@@ -239,6 +238,7 @@ map("n", "<leader>g", "<cmd>FzfLua lsp_live_workspace_symbols<cr>")
 map("n", "<leader><leader>g", "<cmd>FzfLua live_grep_native<cr>")
 map("n", "<leader><leader>f", '<cmd>lua require("fzf-lua").lsp_code_actions({ winopts = { fullscreen = false } })<cr>')
 map("n", "<leader>p", "<cmd>lua fzf_plugin_lua_files()<cr>")
+map("n", "<leader>o", "<cmd>FzfLua lsp_document_symbols<cr>")
 
 ----------------------------------------------------------------------------------------------------------------
 --                                                 formatter.vim                                              --
