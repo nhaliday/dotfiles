@@ -44,11 +44,12 @@ local PACKAGES = {
 	"hrsh7th/vim-vsnip",
 	"hrsh7th/vim-vsnip-integ",
 	"j-hui/fidget.nvim",
+	"mfussenegger/nvim-ansible",
 	"mfussenegger/nvim-lint",
 	"mhartington/formatter.nvim",
 	"neovim/nvim-lspconfig",
 	"nvim-treesitter/nvim-treesitter",
-	"mfussenegger/nvim-ansible",
+	"lervag/vimtex",
 }
 
 local PAQS_PATH = vim.fn.stdpath("data") .. "/site/pack/paqs"
