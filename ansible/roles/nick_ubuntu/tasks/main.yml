@@ -1,0 +1,23 @@
+---
+- name: Install core apt packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - bat
+      - curl
+      - fd-find
+      - fish
+      - fzf
+      - git
+      - git-delta
+      - htop
+      - jq
+      - neovim
+      - ripgrep
+      - starship
+      - stow
+      - tmux
+      - tree
+      - wget
+    state: present
+    update_cache: true
