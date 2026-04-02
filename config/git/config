@@ -12,7 +12,7 @@
     dh = diff HEAD
     fm = fetch origin main:main
     s = status
-    ci = commit -a -m
+    ci = commit
     co = checkout
     co- = checkout -- .
     pl = pull
