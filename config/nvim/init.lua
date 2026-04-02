@@ -228,7 +228,7 @@ function fzf_plugin_lua_files()
 	)
 end
 
-map("n", "<enter>", '<cmd>lua require("fzf-lua").lsp_definitions({ jump_to_single_result = true })<cr>')
+map("n", "<enter>", '<cmd>lua require("fzf-lua").lsp_definitions({ jump1 = true })<cr>')
 map("n", "<leader>f", "<cmd>FzfLua files<cr>")
 map("n", "<leader>b", "<cmd>FzfLua buffers<cr>")
 map("n", "<leader>s", "<cmd>FzfLua grep_cword<cr>")
