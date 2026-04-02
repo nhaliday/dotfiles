@@ -44,12 +44,13 @@ local PACKAGES = {
 	"hrsh7th/vim-vsnip",
 	"hrsh7th/vim-vsnip-integ",
 	"j-hui/fidget.nvim",
+	"lervag/vimtex",
 	"mfussenegger/nvim-ansible",
 	"mfussenegger/nvim-lint",
 	"mhartington/formatter.nvim",
+	"micangl/cmp-vimtex",
 	"neovim/nvim-lspconfig",
 	"nvim-treesitter/nvim-treesitter",
-	"lervag/vimtex",
 }
 
 local PAQS_PATH = vim.fn.stdpath("data") .. "/site/pack/paqs"
@@ -390,6 +391,7 @@ cmp.setup({
 	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp", group_index = 1 },
+		{ name = "vimtex", group_index = 1 },
 		{ name = "vsnip", group_index = 1 },
 		{ name = "buffer", group_index = 2 },
 		{ name = "nvim_lsp_signature_help", group_index = 3 },
