@@ -36,6 +36,7 @@ local PACKAGES = {
 	"tpope/vim-abolish",
 
 	"filipdutescu/renamer.nvim",
+	"greggh/claude-code.nvim",
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-nvim-lsp",
 	"hrsh7th/cmp-nvim-lsp-signature-help",
@@ -508,3 +509,8 @@ map("n", "<leader><right>", "<cmd>SidewaysRight<cr>")
 
 vim.g.EasyMotion_do_mapping = true
 map("n", "\\", "<Plug>(easymotion-prefix)")
+
+----------------------------------------------------------------------------------------------------------------
+--                                      claude-code.nvim                                                      --
+----------------------------------------------------------------------------------------------------------------
+require("claude-code").setup()
