@@ -31,6 +31,7 @@
       - jq
       - "linux-headers-{{ ansible_kernel }}"
       - neovim
+      - python3-psutil
       - ripgrep
       - stow
       - tmux
