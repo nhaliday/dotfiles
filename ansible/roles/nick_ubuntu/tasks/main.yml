@@ -26,6 +26,7 @@
       - gh
       - git
       - git-delta
+      - golang
       - htop
       - jq
       - "linux-headers-{{ ansible_kernel }}"
