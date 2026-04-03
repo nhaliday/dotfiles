@@ -21,3 +21,9 @@ set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 
 set -gx PATH $PATH $HOME/.local/bin
+
+# PyPy GC nursery size: suppresses "cannot find your CPU L2 cache size" warning
+# on macOS/Apple Silicon (https://github.com/pypy/pypy/issues/4939).
+# Value = 1/2 of performance-core cluster L2 (hw.perflevel0.l2cachesize = 16MB).
+# Doesn't seem to offer a significant speedup (~8% in one benchmark).
+set -gx PYPY_GC_NURSERY 8M
