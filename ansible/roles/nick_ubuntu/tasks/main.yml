@@ -50,3 +50,8 @@
   community.general.modprobe:
     name: pcspkr
     state: absent
+
+- name: Disable GNOME audible bell
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/preferences/audible-bell
+    value: "false"
