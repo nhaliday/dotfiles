@@ -37,3 +37,16 @@
       - wget
     state: present
     update_cache: true
+
+- name: Blacklist pc speaker module
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/modprobe.d/nobeep.conf
+    content: "blacklist pcspkr\n"
+    mode: "0644"
+
+- name: Unload pc speaker module
+  become: true
+  community.general.modprobe:
+    name: pcspkr
+    state: absent
