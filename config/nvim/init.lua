@@ -42,8 +42,9 @@ local PACKAGES = {
 	"hrsh7th/cmp-nvim-lsp-signature-help",
 	"hrsh7th/cmp-path",
 	"hrsh7th/nvim-cmp",
-	"hrsh7th/vim-vsnip",
-	"hrsh7th/vim-vsnip-integ",
+	"L3MON4D3/LuaSnip",
+	"rafamadriz/friendly-snippets",
+	"saadparwaiz1/cmp_luasnip",
 	"j-hui/fidget.nvim",
 	"lervag/vimtex",
 	"mfussenegger/nvim-ansible",
@@ -160,6 +161,30 @@ vim.cmd([[colorscheme gruvbox]])
 ----------------------------------------------------------------------------------------------------------------
 
 require("hardline").setup({})
+
+----------------------------------------------------------------------------------------------------------------
+--                                    LuaSnip/friendly-snippets                                               --
+----------------------------------------------------------------------------------------------------------------
+require("luasnip.loaders.from_vscode").lazy_load()
+
+local ls = require("luasnip")
+local s = ls.snippet
+local t = ls.text_node
+
+ls.add_snippets("json", {
+	s("pyright-pypy", t('{"venvPath": ".", "venv": ".venv", "extraPaths": [".venv/lib/pypy3.10/site-packages"]}')),
+})
+
+ls.add_snippets("toml", {
+	s("uv-acl", t({
+		'[tool.uv.sources]',
+		'ac-library-python = { git = "https://github.com/not522/ac-library-python", rev = "27fdbb71cd0d566bdeb12746db59c9d908c6b5d5" }',
+	})),
+	s("uv-system", t({
+		'[tool.uv]',
+		'python-preference = "only-system"',
+	})),
+})
 
 ----------------------------------------------------------------------------------------------------------------
 --                                           nvim-tree.lua                                                    --
@@ -365,7 +390,7 @@ end
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body)
+			require("luasnip").lsp_expand(args.body)
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
@@ -393,7 +418,7 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp", group_index = 1 },
 		{ name = "vimtex", group_index = 1 },
-		{ name = "vsnip", group_index = 1 },
+		{ name = "luasnip", group_index = 1 },
 		{ name = "buffer", group_index = 2 },
 		{ name = "nvim_lsp_signature_help", group_index = 3 },
 		{ name = "path", group_index = 4 },
