@@ -160,7 +160,10 @@ vim.cmd([[colorscheme gruvbox]])
 --                                             hardline                                                       --
 ----------------------------------------------------------------------------------------------------------------
 
-require("hardline").setup({})
+local hardline_defaults = require("hardline").options
+local hardline_sections = vim.deepcopy(hardline_defaults.sections)
+table.insert(hardline_sections, 2, { class = "med", item = require("hardline.parts.cwd").get_item })
+require("hardline").setup({ sections = hardline_sections })
 
 ----------------------------------------------------------------------------------------------------------------
 --                                    LuaSnip/friendly-snippets                                               --
