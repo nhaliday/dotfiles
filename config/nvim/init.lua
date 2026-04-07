@@ -326,6 +326,15 @@ require("formatter").setup({
 		cmake = {
 			require("formatter.filetypes.cmake").cmakeformat,
 		},
+		toml = {
+			function()
+				return {
+					exe = "tombi",
+					args = { "format", "-" },
+					stdin = true,
+				}
+			end,
+		},
 	},
 })
 
@@ -351,6 +360,7 @@ require("lint").linters_by_ft = {
 	py = { "flake8" },
 	sh = { "shellcheck" },
 	vim = { "vint" },
+	toml = { "tombi" },
 	yaml = { "yamllint" },
 	zsh = { "shellcheck_for_zsh" },
 }
