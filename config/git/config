@@ -9,6 +9,7 @@
     b = branch -vv --sort=committerdate
     ba = branch -avv --sort=committerdate
     d = diff
+    dc = diff --cached
     dh = diff HEAD
     fm = fetch origin main:main
     s = status
@@ -26,5 +27,6 @@
     st = stash
     t = log --tags --decorate --simplify-by-decoration --oneline
     ct = "!create_tag() { set -e; git tag -a $1 -m \"Tagging $1\"; git push origin $1; }; create_tag"
+    top = rev-parse --show-toplevel
 [pull]
 	  ff = only
