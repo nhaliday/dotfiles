@@ -179,14 +179,20 @@ ls.add_snippets("json", {
 })
 
 ls.add_snippets("toml", {
-	s("uv-acl", t({
-		'[tool.uv.sources]',
-		'ac-library-python = { git = "https://github.com/not522/ac-library-python", rev = "27fdbb71cd0d566bdeb12746db59c9d908c6b5d5" }',
-	})),
-	s("uv-system", t({
-		'[tool.uv]',
-		'python-preference = "only-system"',
-	})),
+	s(
+		"uv-acl",
+		t({
+			"[tool.uv.sources]",
+			'ac-library-python = { git = "https://github.com/not522/ac-library-python", rev = "27fdbb71cd0d566bdeb12746db59c9d908c6b5d5" }',
+		})
+	),
+	s(
+		"uv-system",
+		t({
+			"[tool.uv]",
+			'python-preference = "only-system"',
+		})
+	),
 })
 
 ----------------------------------------------------------------------------------------------------------------
