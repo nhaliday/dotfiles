@@ -54,7 +54,6 @@
       - stow
       - tmux
       - tree
-      - tree-sitter-cli
       - wget
       - yamllint
     state: present
