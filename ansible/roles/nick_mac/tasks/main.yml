@@ -1,3 +1,20 @@
 ---
 - name: Basic settings
   ansible.builtin.import_tasks: basic_settings.yml
+
+# This helps with running on Retina display.
+- name: Get OilsDev VM info
+  ansible.builtin.command:
+    cmd: VBoxManage showvminfo OilsDev --machinereadable
+  register: oilsdev_info
+  changed_when: false
+
+- name: Set OilsDev VM vram to 128 MB
+  ansible.builtin.command:
+    cmd: VBoxManage modifyvm OilsDev --vram 128
+  when: "'vram=128' not in oilsdev_info.stdout"
+
+- name: Set OilsDev VM clipboard to bidirectional
+  ansible.builtin.command:
+    cmd: VBoxManage modifyvm OilsDev --clipboard-mode bidirectional
+  when: "'clipboard=\"bidirectional\"' not in oilsdev_info.stdout"
