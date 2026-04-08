@@ -2,7 +2,8 @@
 - name: Basic settings
   ansible.builtin.import_tasks: basic_settings.yml
 
-# This helps with running on Retina display.
+# This helps with running on Retina display. Also helps to set fractional scaling in
+# Settings > Display.
 - name: Get OilsDev VM info
   ansible.builtin.command:
     cmd: VBoxManage showvminfo OilsDev --machinereadable
