@@ -29,8 +29,12 @@
   become: true
   ansible.builtin.apt:
     name:
+      - "linux-headers-{{ ansible_kernel }}"
+      - autojump
       - bat
       - build-essential  # Install before installing VirtualBox Guest Additions.
+      - clang-format
+      - clangd
       - curl
       - dkms
       - fd-find
@@ -42,16 +46,23 @@
       - golang
       - htop
       - jq
-      - "linux-headers-{{ ansible_kernel }}"
       - neovim
+      - pipx
       - python3-psutil
       - ripgrep
+      - shellcheck
       - stow
       - tmux
       - tree
+      - tree-sitter-cli
       - wget
+      - yamllint
     state: present
     update_cache: true
+
+- name: Install pyright via pipx
+  community.general.pipx:
+    name: pyright
 
 - name: Blacklist pc speaker module
   become: true
