@@ -34,4 +34,6 @@
     ct = "!create_tag() { set -e; git tag -a $1 -m \"Tagging $1\"; git push origin $1; }; create_tag"
     top = rev-parse --show-toplevel
 [pull]
-	  ff = only
+    ff = only
+[include]
+    path = ~/.config/git/config-linux

@@ -104,6 +104,10 @@
     key: /org/gnome/desktop/wm/preferences/audible-bell
     value: "false"
 
+- name: Stow config_linux into ~/.config
+  ansible.builtin.command:
+    cmd: stow --restow --target={{ ansible_facts["env"]["XDG_CONFIG_HOME"] | default(ansible_facts["env"].HOME + "/.config") }} --dir={{ playbook_dir }}/.. config_linux
+
 - name: Install Claude Code
   ansible.builtin.shell:
     cmd: curl -fsSL https://claude.ai/install.sh | bash
