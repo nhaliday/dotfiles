@@ -57,3 +57,8 @@
   community.general.dconf:
     key: /org/gnome/desktop/wm/preferences/audible-bell
     value: "false"
+
+- name: Install Claude Code
+  ansible.builtin.shell:
+    cmd: curl -fsSL https://claude.ai/install.sh | bash
+    creates: "{{ ansible_facts['env'].HOME }}/.local/bin/claude"
