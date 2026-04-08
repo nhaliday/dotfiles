@@ -1,8 +1,16 @@
 ---
 - name: Add Neovim unstable PPA
   become: true
-  ansible.builtin.apt_repository:
-    repo: ppa:neovim-ppa/unstable
+  block:
+    - name: Add Neovim PPA key
+      ansible.builtin.get_url:
+        url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x9DBB0BE9366964F134855E2255F96FCF8231B6DD
+        dest: /usr/share/keyrings/neovim-ppa.asc
+        mode: "0644"
+    - name: Add Neovim PPA source
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/neovim-ppa.asc] https://ppa.launchpadcontent.net/neovim-ppa/unstable/ubuntu {{ ansible_distribution_release }} main"
+        filename: neovim-ppa
 
 - name: Add GitHub CLI apt repository
   become: true
