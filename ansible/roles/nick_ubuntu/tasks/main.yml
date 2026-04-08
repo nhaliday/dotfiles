@@ -57,6 +57,8 @@
       - tmux
       - trash-cli
       - tree
+      - bubblewrap  # Claude Code sandbox dependency.
+      - socat  # Claude Code sandbox dependency.
       - wget
       - yamllint
     state: present
@@ -70,6 +72,12 @@
   become: true
   community.general.npm:
     name: tree-sitter-cli
+    global: true
+
+- name: Install Claude Code sandbox runtime via npm
+  become: true
+  community.general.npm:
+    name: "@anthropic-ai/sandbox-runtime"
     global: true
 
 - name: Set login shell to Fish
