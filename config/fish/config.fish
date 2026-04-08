@@ -1,6 +1,11 @@
 fish_add_path /opt/homebrew/sbin /opt/homebrew/bin
 
-[ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
+for _aj in /opt/homebrew/share/autojump/autojump.fish /usr/share/autojump/autojump.fish
+    if [ -f $_aj ]
+        source $_aj
+        break
+    end
+end
 
 command -q starship; and starship init fish | source
 
