@@ -70,6 +70,12 @@
     name: tree-sitter-cli
     global: true
 
+- name: Set login shell to Fish
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/fish
+
 - name: Blacklist pc speaker module
   become: true
   ansible.builtin.copy:
