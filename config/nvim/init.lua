@@ -387,7 +387,7 @@ require("cmp_nvim_lsp_signature_help")
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "clangd", "pyright", "rust_analyzer", "ansiblels" }
+local servers = { "clangd", "ltex_plus", "pyright", "rust_analyzer", "ansiblels" }
 require("lspconfig")
 for _, server in ipairs(servers) do
 	vim.lsp.config(server, {
