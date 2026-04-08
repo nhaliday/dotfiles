@@ -1,4 +1,9 @@
 ---
+- name: Add Neovim unstable PPA
+  become: true
+  ansible.builtin.apt_repository:
+    repo: ppa:neovim-ppa/unstable
+
 - name: Add GitHub CLI apt repository
   become: true
   block:
