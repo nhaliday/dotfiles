@@ -47,6 +47,7 @@
       - htop
       - jq
       - neovim
+      - npm
       - pipx
       - python3-psutil
       - ripgrep
@@ -62,6 +63,12 @@
 - name: Install pyright via pipx
   community.general.pipx:
     name: pyright
+
+- name: Install tree-sitter-cli via npm
+  become: true
+  community.general.npm:
+    name: tree-sitter-cli
+    global: true
 
 - name: Blacklist pc speaker module
   become: true
