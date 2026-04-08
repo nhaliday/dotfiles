@@ -43,6 +43,7 @@
       - gh
       - git
       - git-delta
+      - git-gui
       - golang
       - htop
       - jq
@@ -54,6 +55,7 @@
       - shellcheck
       - stow
       - tmux
+      - trash-cli
       - tree
       - wget
       - yamllint
