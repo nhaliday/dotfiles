@@ -1,3 +1,8 @@
+[user]
+    name = nhaliday
+    email = nick.haliday@gmail.com
+[init]
+    defaultBranch = master
 [core]
     editor = nvim
     pager = delta --diff-so-fancy
