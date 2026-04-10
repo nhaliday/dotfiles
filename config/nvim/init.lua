@@ -312,7 +312,12 @@ require("formatter").setup({
 			require("formatter.filetypes.lua").stylua,
 		},
 		python = {
-			require("formatter.filetypes.python").black,
+			function()
+				if vim.fn.hostname() == "OilsDev" then
+					return nil
+				end
+				return require("formatter.filetypes.python").black()
+			end,
 		},
 		rust = {
 			function()
@@ -387,7 +392,7 @@ require("cmp_nvim_lsp_signature_help")
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local python_lsp = vim.fn.has("linux") == 1 and "pylsp" or "pyright"
+local python_lsp = vim.fn.hostname() == "OilsDev" and "pylsp" or "pyright"
 local servers = { "clangd", "ltex_plus", python_lsp, "rust_analyzer", "ansiblels" }
 require("lspconfig")
 for _, server in ipairs(servers) do
@@ -395,6 +400,27 @@ for _, server in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+if python_lsp == "pylsp" then
+	local oils_root = vim.fn.expand("~/Documents/src/oils")
+	local deps = oils_root .. "/../oils.DEPS/wedge"
+	vim.lsp.config("pylsp", {
+		cmd_env = {
+			PYTHONPATH = deps .. "/mypy/0.780",
+		},
+		settings = {
+			pylsp = {
+				plugins = {
+					pylsp_mypy = {
+						enabled = true,
+						live_mode = false,
+					},
+				},
+			},
+		},
+	})
+end
+
 vim.lsp.enable(servers)
 
 local cmp = require("cmp")

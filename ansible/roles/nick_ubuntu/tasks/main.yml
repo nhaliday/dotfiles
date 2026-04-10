@@ -64,14 +64,6 @@
     state: present
     update_cache: true
 
-- name: Install pyright via pipx
-  community.general.pipx:
-    name: pyright
-
-- name: Install mypy via pipx
-  community.general.pipx:
-    name: mypy
-
 - name: Install python-lsp-server via pipx
   community.general.pipx:
     name: python-lsp-server
