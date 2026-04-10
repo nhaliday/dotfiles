@@ -1,4 +1,5 @@
 ---
+# TODO: I don't remember why I used this approach in 2 tasks instead of ansible.builtin.user.
 - name: Add Fish to standard login shells
   become: true
   become_method: ansible.builtin.sudo
