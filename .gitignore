@@ -183,3 +183,6 @@ pyrightconfig.json
 
 ### Claude ###
 .claude/worktrees/
+
+### Reversing a C++ ignore ###
+!*.d
