@@ -19,3 +19,13 @@
   ansible.builtin.command:
     cmd: VBoxManage modifyvm OilsDev --clipboard-mode bidirectional
   when: "'clipboard=\"bidirectional\"' not in oilsdev_info.stdout"
+
+- name: Set OilsDev VM memory to 8219 MB
+  ansible.builtin.command:
+    cmd: VBoxManage modifyvm OilsDev --memory 8219
+  when: "'memory=8219' not in oilsdev_info.stdout"
+
+- name: Set OilsDev VM CPUs to 4
+  ansible.builtin.command:
+    cmd: VBoxManage modifyvm OilsDev --cpus 4
+  when: "'cpus=4' not in oilsdev_info.stdout"
