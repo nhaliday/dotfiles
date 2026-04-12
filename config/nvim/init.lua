@@ -330,6 +330,9 @@ require("formatter").setup({
 				}
 			end,
 		},
+		haskell = {
+			require("formatter.filetypes.haskell").fourmolu,
+		},
 		go = {
 			require("formatter.filetypes.go").gofmt,
 			require("formatter.filetypes.go").goimports,
@@ -393,7 +396,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local python_lsp = vim.fn.hostname() == "OilsDev" and "pylsp" or "pyright"
-local servers = { "clangd", "ltex_plus", python_lsp, "rust_analyzer", "ansiblels" }
+local servers = { "clangd", "ltex_plus", python_lsp, "rust_analyzer", "ansiblels", "hls" }
 require("lspconfig")
 for _, server in ipairs(servers) do
 	vim.lsp.config(server, {

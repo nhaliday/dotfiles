@@ -20,6 +20,8 @@ set --global --export EDITOR nvim
 set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 
+set -gx PATH $HOME/.ghcup/bin $PATH
+
 set -gx PATH $PATH $HOME/.local/bin
 
 # PyPy GC nursery size: suppresses "cannot find your CPU L2 cache size" warning
