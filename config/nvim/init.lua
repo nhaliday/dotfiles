@@ -53,6 +53,7 @@ local PACKAGES = {
 	"micangl/cmp-vimtex",
 	"neovim/nvim-lspconfig",
 	"nvim-treesitter/nvim-treesitter",
+	"stevearc/aerial.nvim",
 }
 
 local PAQS_PATH = vim.fn.stdpath("data") .. "/site/pack/paqs"
@@ -216,6 +217,26 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 ----------------------------------------------------------------------------------------------------------------
+--                                              aerial                                                        --
+----------------------------------------------------------------------------------------------------------------
+
+require("aerial").setup({
+	filter_kind = {
+		"Class",
+		"Constructor",
+		"Enum",
+		"Function",
+		"Interface",
+		"Method",
+		"Module",
+		"Struct",
+		"Trait",
+	},
+})
+
+map("n", "<leader><leader>o", "<cmd>AerialToggle<cr>")
+
+----------------------------------------------------------------------------------------------------------------
 --                                             renamer                                                        --
 ----------------------------------------------------------------------------------------------------------------
 
@@ -274,7 +295,7 @@ map("n", "<leader>g", "<cmd>FzfLua lsp_live_workspace_symbols<cr>")
 map("n", "<leader><leader>g", "<cmd>FzfLua live_grep_native<cr>")
 map("n", "<leader><leader>f", '<cmd>lua require("fzf-lua").lsp_code_actions({ winopts = { fullscreen = false } })<cr>')
 map("n", "<leader>p", "<cmd>lua fzf_plugin_lua_files()<cr>")
-map("n", "<leader>o", "<cmd>FzfLua lsp_document_symbols<cr>")
+map("n", "<leader>o", '<cmd>lua require("fzf-lua").lsp_document_symbols({ regex_filter = { "Variable", exclude = true } })<cr>')
 
 ----------------------------------------------------------------------------------------------------------------
 --                                                 formatter.vim                                              --

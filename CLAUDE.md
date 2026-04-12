@@ -55,3 +55,7 @@ ansible/
 ## Shell
 
 The default shell is **Fish** (`/opt/homebrew/bin/fish`), set via Ansible. Zsh config exists but Fish is primary.
+
+## Conventions
+
+- Commit messages consist of a comma-separated list of components modified (often paths in the repo) and a message, separated by a colon. The component list might, for example, include some subset of `config/fish, config/nvim, git, claude, ansible`.
