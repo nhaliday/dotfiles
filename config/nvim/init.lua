@@ -53,6 +53,8 @@ local PACKAGES = {
 	"micangl/cmp-vimtex",
 	"neovim/nvim-lspconfig",
 	"nvim-treesitter/nvim-treesitter",
+	"kevinhwang91/nvim-ufo",
+	"kevinhwang91/promise-async",
 	"stevearc/aerial.nvim",
 }
 
@@ -97,6 +99,12 @@ vim.opt.expandtab = true
 vim.opt.number = true
 vim.opt.hidden = false
 vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case --column --line-number"
+
+-- nvim-ufo requires these fold settings.
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 -- Disable netrw per nvim-tree.lua's suggestion.
 vim.g.loaded_netrw = 1
@@ -235,6 +243,19 @@ require("aerial").setup({
 })
 
 map("n", "<leader><leader>o", "<cmd>AerialToggle<cr>")
+
+----------------------------------------------------------------------------------------------------------------
+--                                             nvim-ufo                                                       --
+----------------------------------------------------------------------------------------------------------------
+
+require("ufo").setup({
+	provider_selector = function()
+		return { "lsp", "indent" }
+	end,
+})
+
+map("n", "zR", '<cmd>lua require("ufo").openAllFolds()<cr>')
+map("n", "zM", '<cmd>lua require("ufo").closeAllFolds()<cr>')
 
 ----------------------------------------------------------------------------------------------------------------
 --                                             renamer                                                        --
