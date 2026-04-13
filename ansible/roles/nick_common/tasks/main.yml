@@ -1,3 +1,12 @@
 ---
 - name: Config symlinks
   ansible.builtin.import_tasks: config.yml
+
+- name: Install Perl modules for latexindent
+  become: true
+  community.general.cpanm:
+    name: "{{ item }}"
+  loop:
+    - File::HomeDir
+    - YAML::Tiny
+    - Unicode::GCString

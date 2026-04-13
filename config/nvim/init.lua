@@ -110,6 +110,16 @@ vim.opt.foldenable = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "tex",
+	callback = function()
+		vim.bo.expandtab = false
+		vim.bo.tabstop = 1
+		vim.bo.shiftwidth = 1
+		vim.bo.softtabstop = 1
+	end,
+})
+
 vim.opt.background = "dark"
 
 ----------------------------------------------------------------------------------------------------------------
@@ -381,6 +391,15 @@ require("formatter").setup({
 		},
 		cmake = {
 			require("formatter.filetypes.cmake").cmakeformat,
+		},
+		tex = {
+			function()
+				return {
+					exe = "latexindent",
+					args = { "-m", "-y=modifyLineBreaks:textWrapOptions:columns:79", "-" },
+					stdin = true,
+				}
+			end,
 		},
 		toml = {
 			function()
