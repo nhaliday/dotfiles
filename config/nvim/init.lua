@@ -471,6 +471,7 @@ cmp.setup({
 	}),
 })
 
+map("n", "gt", '<cmd>lua require("fzf-lua").lsp_typedefs({ jump1 = true })<cr>')
 map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float({focus = false})<cr>")
 map("n", "<leader>i", "<cmd>lua vim.lsp.buf.hover()<cr>")
 
