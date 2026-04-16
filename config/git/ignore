@@ -316,3 +316,4 @@ Cargo.lock
 
 ### Claude ###
 **/.claude/settings.local.json
+**/.claude/worktrees/
