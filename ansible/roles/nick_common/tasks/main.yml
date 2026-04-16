@@ -10,3 +10,4 @@
     - File::HomeDir
     - YAML::Tiny
     - Unicode::GCString
+    - Data::Dumper
