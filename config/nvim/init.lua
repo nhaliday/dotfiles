@@ -326,7 +326,11 @@ map("n", "<leader>g", "<cmd>FzfLua lsp_live_workspace_symbols<cr>")
 map("n", "<leader><leader>g", "<cmd>FzfLua live_grep_native<cr>")
 map("n", "<leader><leader>f", '<cmd>lua require("fzf-lua").lsp_code_actions({ winopts = { fullscreen = false } })<cr>')
 map("n", "<leader>p", "<cmd>lua fzf_plugin_lua_files()<cr>")
-map("n", "<leader>o", '<cmd>lua require("fzf-lua").lsp_document_symbols({ regex_filter = { "Variable", exclude = true } })<cr>')
+map(
+	"n",
+	"<leader>o",
+	'<cmd>lua require("fzf-lua").lsp_document_symbols({ regex_filter = { "Variable", exclude = true } })<cr>'
+)
 
 ----------------------------------------------------------------------------------------------------------------
 --                                                 formatter.vim                                              --
