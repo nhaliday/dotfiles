@@ -414,6 +414,9 @@ require("formatter").setup({
 				}
 			end,
 		},
+		typescript = {
+			require("formatter.filetypes.typescript").biome,
+		},
 	},
 })
 
@@ -440,6 +443,7 @@ require("lint").linters_by_ft = {
 	sh = { "shellcheck" },
 	vim = { "vint" },
 	toml = { "tombi" },
+	typescript = { "biomejs" },
 	yaml = { "yamllint" },
 	zsh = { "shellcheck_for_zsh" },
 }
@@ -461,7 +465,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local python_lsp = vim.fn.hostname() == "OilsDev" and "pylsp" or "pyright"
-local servers = { "clangd", "ltex_plus", python_lsp, "rust_analyzer", "ansiblels", "hls" }
+local servers = { "clangd", "ltex_plus", python_lsp, "rust_analyzer", "ansiblels", "hls", "vtsls" }
 require("lspconfig")
 for _, server in ipairs(servers) do
 	vim.lsp.config(server, {
@@ -469,7 +473,7 @@ for _, server in ipairs(servers) do
 	})
 end
 
-if python_lsp == "pylsp" then
+if vim.fn.hostname() == "OilsDev" then
 	local oils_root = vim.fn.expand("~/Documents/src/oils")
 	local deps = oils_root .. "/../oils.DEPS/wedge"
 	vim.lsp.config("pylsp", {
