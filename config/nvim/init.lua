@@ -473,6 +473,16 @@ for _, server in ipairs(servers) do
 	})
 end
 
+vim.lsp.config("rust_analyzer", {
+	settings = {
+		["rust-analyzer"] = {
+			cargo = {
+				features = "all",
+			},
+		},
+	},
+})
+
 if vim.fn.hostname() == "OilsDev" then
 	local oils_root = vim.fn.expand("~/Documents/src/oils")
 	local deps = oils_root .. "/../oils.DEPS/wedge"
