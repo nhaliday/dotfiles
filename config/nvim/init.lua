@@ -153,7 +153,7 @@ map("n", "L", "<c-i>")
 map("n", "<leader>r", ":%s@<c-r><c-w>@@gcI<left><left><left><left>")
 map("v", "<leader>r", 'y:%s@<C-r>"@@gcI<left><left><left><left>')
 
-map("n", "<leader>R", ":%s@\b<c-r><c-w>\b@@gI<left><left><left>")
+map("n", "<leader>R", ":%s@\\<<c-r><c-w>\\>@@gI<left><left><left>")
 map("v", "<leader>R", 'y:%s@<C-r>"@@gI<left><left><left>')
 
 -- Join two lines
