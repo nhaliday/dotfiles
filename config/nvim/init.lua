@@ -418,6 +418,22 @@ require("formatter").setup({
 		typescript = {
 			require("formatter.filetypes.typescript").biome,
 		},
+		markdown = {
+			function()
+				return {
+					exe = "prettier",
+					args = {
+						"--stdin-filepath",
+						formatter_nvim_utils.escape_path(formatter_nvim_utils.get_current_buffer_file_path()),
+						"--prose-wrap",
+						"always",
+						"--print-width",
+						"80",
+					},
+					stdin = true,
+				}
+			end,
+		},
 	},
 })
 
