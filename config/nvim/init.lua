@@ -307,6 +307,7 @@ require("fzf-lua").setup({
 		},
 	},
 })
+require("fzf-lua").register_ui_select()
 
 function fzf_plugin_lua_files()
 	require("fzf-lua").fzf_exec(
