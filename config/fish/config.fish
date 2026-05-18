@@ -13,6 +13,7 @@ command -q starship; and starship init fish | source
 command -q opam; and source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
 set --global --export EDITOR nvim
+set --global --export NVIM_LISTEN_ADDRESS /tmp/nvimsocket
 
 # Added by LM Studio CLI (lms)
  set -gx PATH $PATH $HOME/.cache/lm-studio/bin
